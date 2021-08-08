@@ -5,6 +5,7 @@ namespace MobileKit.Interfaces
     {
         void Play(string filename, bool loop = false);
         void Stop();
+        void Volume(double value);
         void Toggle();
     }
 }

@@ -61,10 +61,19 @@ namespace MobileKit
             }
         }
 
+
+        public void Volume(double value)
+        {
+            if (value < 0 || value > 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            _player.SetVolume((float)value, 200);
+        }
+
         private void _player_FinishedPlaying(object sender, AVStatusEventArgs e)
         {
             _ = e;
-            //throw new NotImplementedException();
         }
     }
 }
