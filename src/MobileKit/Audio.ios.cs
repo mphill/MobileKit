@@ -17,7 +17,7 @@ namespace MobileKit
         public Audio()
         {
             _session = AVAudioSession.SharedInstance();
-            _session.SetCategory(AVAudioSessionCategory.Ambient);
+            _session.SetCategory(AVAudioSessionCategory.Playback);
             _session.SetActive(true);
         }
 
