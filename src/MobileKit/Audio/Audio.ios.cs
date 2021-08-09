@@ -12,6 +12,7 @@ namespace MobileKit
 
         private AVAudioPlayer _player;
         private AVAudioSession _session;
+        private Action _onCompleted;
         private string _file;
 
         public Audio()
@@ -21,8 +22,11 @@ namespace MobileKit
             _session.SetActive(true);
         }
 
-        public void Play(string filename, bool loop = false)
+        public bool IsPlaying => _player.Playing;
+
+        public void Play(string filename, bool loop = false, Action onCompleted = null)
         {
+            _onCompleted = onCompleted;
             _file = filename;
 
             var songURL = NSUrl.FromFilename(filename);
@@ -34,6 +38,7 @@ namespace MobileKit
             var type = UTType.CreateFromExtension(extension).ToString();
 
             _player = new AVAudioPlayer(songURL, "mp3", out NSError error);
+
             _player.FinishedPlaying += _player_FinishedPlaying;
 
             if (loop)
@@ -61,7 +66,6 @@ namespace MobileKit
             }
         }
 
-
         public void Volume(double value)
         {
             if (value < 0 || value > 1)
@@ -73,7 +77,7 @@ namespace MobileKit
 
         private void _player_FinishedPlaying(object sender, AVStatusEventArgs e)
         {
-            _ = e;
+            _onCompleted?.Invoke();
         }
     }
 }

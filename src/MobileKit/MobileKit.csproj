@@ -68,21 +68,16 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Remove=".vs\MobileKit\xs\UserPrefs.xml" />
-    <None Remove="Interfaces\" />
-    <None Remove="Brightness\" />
-    <None Remove="Xamarin.Forms" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Brightness\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="MobileKitManager.shared.cs">
-      <SubType></SubType>
-    </Compile>
+    <Folder Include="Audio\" />
+    <Folder Include="BackgroundTask\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove=".vs\MobileKit\xs\UserPrefs.xml" />
   </ItemGroup>
 </Project>

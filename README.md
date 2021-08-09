@@ -36,6 +36,8 @@ Audio.Instance().Play("alert.mp3");
 
 Control the screen brightness
 
+Android: Required **WRITE_SETTINGS** permission
+
 **Example: Set screen brightness on a 0.0 - 1.0 scale**
 
 ```c#

@@ -1,7 +1,13 @@
 using System;
+using Android.Content;
+using Android.OS;
+using Java.Lang;
+using Xamarin.Essentials;
+
+
 namespace MobileKit
 {
-    public class BackgroundTask : IBackgroundTask
+    public partial class BackgroundTask
     {
         private PowerManager _powerManager;
         private PowerManager.WakeLock _wakeLock;
@@ -10,9 +16,11 @@ namespace MobileKit
 
         public BackgroundTask()
         {
-            _powerManager = (PowerManager)Platform.AppContext.GetSystemService("Power");
-            _wakeLock = _powerManager.NewWakeLock(WakeLockFlags.Partial, "rohit_bg_wakelock");
+            _powerManager ??= Platform.AppContext.GetSystemService(Context.PowerService) as PowerManager;
+            _wakeLock ??= _powerManager.NewWakeLock(WakeLockFlags.Partial, "rohit_bg_wakelock");
         }
+
+
 
         public void Start()
         {

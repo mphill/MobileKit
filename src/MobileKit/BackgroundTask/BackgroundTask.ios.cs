@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MobileKit
 {
-    public partial class BackgroundTask : IBackgroundTask
+    public partial class BackgroundTask
     {
         private nint _bgTask;
 
@@ -31,29 +31,6 @@ namespace MobileKit
         public void Status()
         {
             Debug.WriteLine($"{UIApplication.SharedApplication.BackgroundTimeRemaining}");
-        }
-
-        public void Run(TimeSpan delay, Action command)
-        {
-
-            var end = DateTime.Now.AddSeconds(delay.TotalSeconds);
-
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-            {
-                Debug.WriteLine($"{DateTime.Now}");
-
-                var result = DateTime.Now < end;
-
-                //BackgroundTask.Instance.Status();
-
-                if (!result)
-                {
-                    command?.Invoke();
-                    BackgroundTask.Instance.Stop();
-                }
-
-                return result;
-            });
         }
     }
 }
