@@ -22,7 +22,7 @@ namespace MobileKit
             _session.SetActive(true);
         }
 
-        public bool IsPlaying => _player.Playing;
+        public bool IsPlaying => _player?.Playing ?? false;
 
         public void Play(string filename, bool loop = false, Action onCompleted = null)
         {

@@ -35,7 +35,7 @@ namespace MobileKit
             _onCompleted?.Invoke();
         }
 
-        public bool IsPlaying => _player.IsPlaying;
+        public bool IsPlaying => _player?.IsPlaying ?? false;
 
         public void Stop()
         {
