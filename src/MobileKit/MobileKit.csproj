@@ -1,12 +1,13 @@
-<Project Sdk="MSBuild.Sdk.Extras/2.0.29">
+<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
 
   <PropertyGroup>
     
     
     <!--To Multi-target you can do this-->
-    <TargetFrameworks>Xamarin.iOS10;MonoAndroid10.0</TargetFrameworks>
-    
-    <!--Assembly and Namespace info -->
+    <TargetFrameworks></TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">Xamarin.iOS10;MonoAndroid10.0;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">Xamarin.iOS10;MonoAndroid10.0;</TargetFrameworks>
+    <!--Assembly and Namespace info -->   
     <AssemblyName>MobileKit</AssemblyName>
     <RootNamespace>MobileKit</RootNamespace>
     
@@ -27,6 +28,7 @@
     
     <!--Version of C# to use -->
     <LangVersion>default</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     
   </PropertyGroup>
   
