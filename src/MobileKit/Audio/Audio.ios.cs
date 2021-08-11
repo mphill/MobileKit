@@ -72,7 +72,13 @@ namespace MobileKit
             {
                 throw new ArgumentOutOfRangeException();
             }
-            _player.SetVolume((float)value, 200);
+
+            if(_player == null)
+            {
+                return;
+            }
+
+            _player.SetVolume((float)value, 0);
         }
 
         private void _player_FinishedPlaying(object sender, AVStatusEventArgs e)
