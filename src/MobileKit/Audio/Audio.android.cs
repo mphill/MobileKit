@@ -1,6 +1,8 @@
 using System;
 using Android.Media;
+using Android.Media.Session;
 using MobileKit.Interfaces;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MobileKit
@@ -10,8 +12,8 @@ namespace MobileKit
         //https://developer.android.com/guide/topics/media/mediaplayer
         private MediaPlayer _player;
         private Action _onCompleted;
-
-        
+        private bool _nowPlaying;
+        private MediaSession _session;
 
         public void Play(string filename, bool loop = false, Action onCompleted = null)
         {
@@ -37,6 +39,31 @@ namespace MobileKit
 
         public bool IsPlaying => _player?.IsPlaying ?? false;
 
+        public bool NowPlaying {
+            get
+            {
+                return _nowPlaying;
+            }
+
+            set {
+                if(value)
+                {
+                    _session = new MediaSession(Platform.AppContext, "MusicService");
+
+                    var mediaCallback = new MediaSessionCallback();
+                    _session.SetCallback(mediaCallback);
+                    _session.SetFlags(MediaSessionFlags.HandlesMediaButtons | MediaSessionFlags.HandlesTransportControls);
+
+
+
+                    _nowPlaying = true;
+                } else
+                {
+                    _nowPlaying = false;
+                }
+            }
+        }
+
         public void Stop()
         {
             _player.Stop();
@@ -57,6 +84,11 @@ namespace MobileKit
         public void Volume(double value)
         {
             _player.SetVolume((float)value, (float)value);
+        }
+
+        class MediaSessionCallback : MediaSession.Callback
+        {
+
         }
     }
 }
